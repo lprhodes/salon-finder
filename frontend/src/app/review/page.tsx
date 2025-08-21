@@ -247,63 +247,71 @@ export default function SalonReviewPage() {
 
         {salons.length > 0 && (
           <>
-            {/* View Toggle */}
-            <div className="flex gap-2 mb-4">
-              <button
-                onClick={() => setViewMode('individual')}
-                className={`px-3 py-1.5 text-sm rounded-md ${viewMode === 'individual' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}
-              >
-                Individual Review
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`px-3 py-1.5 text-sm rounded-md ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}
-              >
-                List View
-              </button>
-            </div>
-
             {viewMode === 'individual' && currentSalon && (
               <>
-                {/* Compact Progress Bar */}
+                {/* Navigation Bar with Controls */}
                 <div className="bg-white rounded-lg shadow-sm px-4 py-2.5 mb-4">
-                  <div className="flex justify-between items-center mb-1.5">
-                    <span className="text-sm">
-                      Reviewing salon <strong>{currentIndex + 1}</strong> of <strong>{salons.length}</strong>
-                      <span className={`ml-2 px-1.5 py-0.5 rounded text-xs font-semibold ${
-                        salonStatuses[currentIndex] === 'approved' ? 'bg-green-100 text-green-800' :
-                        salonStatuses[currentIndex] === 'rejected' ? 'bg-red-100 text-red-800' :
-                        'bg-yellow-100 text-yellow-800'
-                      }`}>
-                        {(salonStatuses[currentIndex] || 'pending').toUpperCase()}
-                      </span>
-                    </span>
-                    <span className="text-sm">{Math.round(((currentIndex + 1) / salons.length) * 100)}%</span>
+                  <div className="flex items-center justify-between">
+                    {/* Previous Button */}
+                    <button
+                      onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
+                      disabled={currentIndex === 0}
+                      className="px-3 py-1.5 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 disabled:opacity-50"
+                    >
+                      ← Previous
+                    </button>
+                    
+                    {/* Center Section - View Toggle and Progress */}
+                    <div className="flex flex-col items-center gap-2">
+                      {/* View Toggle */}
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setViewMode('individual')}
+                          className={`px-3 py-1 text-xs rounded-md ${viewMode === 'individual' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border'}`}
+                        >
+                          Individual Review
+                        </button>
+                        <button
+                          onClick={() => setViewMode('list')}
+                          className={`px-3 py-1 text-xs rounded-md ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border'}`}
+                        >
+                          List View
+                        </button>
+                      </div>
+                      
+                      {/* Progress Info */}
+                      <div className="flex items-center gap-3 text-sm">
+                        <span>
+                          Reviewing salon <strong>{currentIndex + 1}</strong> of <strong>{salons.length}</strong>
+                        </span>
+                        <span className={`px-1.5 py-0.5 rounded text-xs font-semibold ${
+                          salonStatuses[currentIndex] === 'approved' ? 'bg-green-100 text-green-800' :
+                          salonStatuses[currentIndex] === 'rejected' ? 'bg-red-100 text-red-800' :
+                          'bg-yellow-100 text-yellow-800'
+                        }`}>
+                          {(salonStatuses[currentIndex] || 'pending').toUpperCase()}
+                        </span>
+                        <span className="text-xs text-gray-500">{Math.round(((currentIndex + 1) / salons.length) * 100)}%</span>
+                      </div>
+                      
+                      {/* Progress Bar */}
+                      <div className="w-64 bg-gray-200 rounded-full h-1.5">
+                        <div 
+                          className="bg-blue-600 h-1.5 rounded-full transition-all"
+                          style={{ width: `${((currentIndex + 1) / salons.length) * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Next Button */}
+                    <button
+                      onClick={() => setCurrentIndex(Math.min(salons.length - 1, currentIndex + 1))}
+                      disabled={currentIndex === salons.length - 1}
+                      className="px-3 py-1.5 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 disabled:opacity-50"
+                    >
+                      Next →
+                    </button>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-1.5">
-                    <div 
-                      className="bg-blue-600 h-1.5 rounded-full transition-all"
-                      style={{ width: `${((currentIndex + 1) / salons.length) * 100}%` }}
-                    />
-                  </div>
-                </div>
-
-                {/* Navigation */}
-                <div className="flex justify-between mb-4">
-                  <button
-                    onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
-                    disabled={currentIndex === 0}
-                    className="px-3 py-1.5 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 disabled:opacity-50"
-                  >
-                    ← Previous
-                  </button>
-                  <button
-                    onClick={() => setCurrentIndex(Math.min(salons.length - 1, currentIndex + 1))}
-                    disabled={currentIndex === salons.length - 1}
-                    className="px-3 py-1.5 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 disabled:opacity-50"
-                  >
-                    Next →
-                  </button>
                 </div>
 
                 {/* Image Gallery */}
@@ -557,8 +565,29 @@ export default function SalonReviewPage() {
             )}
 
             {viewMode === 'list' && (
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <h2 className="text-xl font-semibold mb-4">All Salons</h2>
+              <>
+                {/* View Toggle for List Mode */}
+                <div className="bg-white rounded-lg shadow-sm px-4 py-2.5 mb-4">
+                  <div className="flex items-center justify-center">
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setViewMode('individual')}
+                        className={`px-3 py-1 text-xs rounded-md ${viewMode === 'individual' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border'}`}
+                      >
+                        Individual Review
+                      </button>
+                      <button
+                        onClick={() => setViewMode('list')}
+                        className={`px-3 py-1 text-xs rounded-md ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border'}`}
+                      >
+                        List View
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-white rounded-lg shadow-sm p-6">
+                  <h2 className="text-xl font-semibold mb-4">All Salons</h2>
                 <div className="space-y-2">
                   {salons.map((salon, index) => (
                     <div
@@ -582,8 +611,9 @@ export default function SalonReviewPage() {
                       </span>
                     </div>
                   ))}
+                  </div>
                 </div>
-              </div>
+              </>
             )}
           </>
         )}
