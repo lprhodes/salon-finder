@@ -576,9 +576,10 @@ export default function SalonReviewPage() {
 
             {viewMode === 'list' && (
               <>
-                {/* View Toggle for List Mode */}
+                {/* View Toggle for List Mode - Same positioning as Individual mode */}
                 <div className="bg-white rounded-lg shadow-sm px-4 py-2.5 mb-4">
                   <div className="flex items-center">
+                    {/* Left aligned to match Individual mode */}
                     <div className="flex bg-gray-100 rounded-lg p-0.5">
                       <button
                         onClick={() => setViewMode('individual')}
