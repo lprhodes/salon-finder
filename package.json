@@ -1,0 +1,24 @@
+{
+  "name": "salon-finder",
+  "version": "1.0.0",
+  "description": "Fetches salon information using the Perplexity API",
+  "scripts": {
+    "start": "npx tsx src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
+    "axios": "^1.8.1",
+    "clipboardy": "^4.0.0",
+    "dotenv": "^16.4.7",
+    "image-type": "^5.2.0",
+    "sharp": "^0.33.5"
+  }
+}

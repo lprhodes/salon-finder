@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.local.backup
+.env.production
+frontend/.env
+frontend/.env.local
+
+# Production
+build/
+dist/
+frontend/.next/
+frontend/out/
+
+# Cache and logs
+.cache/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+frontend/.npm/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+coverage/
+
+# Thumbnails
+frontend/public/thumbnails/
+
+# Misc
+*.pem
+.vercel
+salon-progress.txt
+cache/
