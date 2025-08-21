@@ -477,39 +477,43 @@ export default function SalonReviewPage() {
                             className="w-full px-2 py-1.5 text-sm border rounded-md"
                           />
                         </div>
-                        <div className="relative">
+                        <div>
                           <label className="block text-xs font-medium mb-0.5">Website</label>
-                          <input
-                            type="url"
-                            value={currentSalon.website || ''}
-                            onChange={(e) => updateSalonField('website', e.target.value)}
-                            className="w-full px-2 py-1.5 text-sm border rounded-md pr-16"
-                          />
-                          {currentSalon.website && (
-                            <button
-                              onClick={() => window.open(currentSalon.website.startsWith('http') ? currentSalon.website : `https://${currentSalon.website}`, '_blank')}
-                              className="absolute right-1 bottom-1 px-1.5 py-0.5 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
-                            >
-                              Open
-                            </button>
-                          )}
+                          <div className="relative">
+                            <input
+                              type="url"
+                              value={currentSalon.website || ''}
+                              onChange={(e) => updateSalonField('website', e.target.value)}
+                              className="w-full px-2 py-1.5 text-sm border rounded-md pr-14"
+                            />
+                            {currentSalon.website && (
+                              <button
+                                onClick={() => window.open(currentSalon.website.startsWith('http') ? currentSalon.website : `https://${currentSalon.website}`, '_blank')}
+                                className="absolute right-1 top-1/2 -translate-y-1/2 px-2 py-0.5 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
+                              >
+                                Open
+                              </button>
+                            )}
+                          </div>
                         </div>
-                        <div className="relative">
+                        <div>
                           <label className="block text-xs font-medium mb-0.5">Booking Link</label>
-                          <input
-                            type="url"
-                            value={currentSalon.bookingLink || ''}
-                            onChange={(e) => updateSalonField('bookingLink', e.target.value)}
-                            className="w-full px-2 py-1.5 text-sm border rounded-md pr-16"
-                          />
-                          {currentSalon.bookingLink && (
-                            <button
-                              onClick={() => window.open(currentSalon.bookingLink.startsWith('http') ? currentSalon.bookingLink : `https://${currentSalon.bookingLink}`, '_blank')}
-                              className="absolute right-1 bottom-1 px-1.5 py-0.5 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
-                            >
-                              Open
-                            </button>
-                          )}
+                          <div className="relative">
+                            <input
+                              type="url"
+                              value={currentSalon.bookingLink || ''}
+                              onChange={(e) => updateSalonField('bookingLink', e.target.value)}
+                              className="w-full px-2 py-1.5 text-sm border rounded-md pr-14"
+                            />
+                            {currentSalon.bookingLink && (
+                              <button
+                                onClick={() => window.open(currentSalon.bookingLink.startsWith('http') ? currentSalon.bookingLink : `https://${currentSalon.bookingLink}`, '_blank')}
+                                className="absolute right-1 top-1/2 -translate-y-1/2 px-2 py-0.5 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
+                              >
+                                Open
+                              </button>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
