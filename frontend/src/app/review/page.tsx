@@ -255,11 +255,7 @@ export default function SalonReviewPage() {
                         <button
                           onClick={() => setViewMode('individual')}
                           title="Individual Review"
-                          className={`px-2 py-1 rounded-md transition-colors ${
-                            viewMode === 'individual' 
-                              ? 'bg-white text-gray-900 shadow-sm' 
-                              : 'text-gray-600 hover:text-gray-900'
-                          }`}
+                          className="px-2 py-1 rounded-md transition-colors bg-white text-gray-900 shadow-sm"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -268,11 +264,7 @@ export default function SalonReviewPage() {
                         <button
                           onClick={() => setViewMode('list')}
                           title="List View"
-                          className={`px-2 py-1 rounded-md transition-colors ${
-                            viewMode === 'list' 
-                              ? 'bg-white text-gray-900 shadow-sm' 
-                              : 'text-gray-600 hover:text-gray-900'
-                          }`}
+                          className="px-2 py-1 rounded-md transition-colors text-gray-600 hover:text-gray-900"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
@@ -332,11 +324,7 @@ export default function SalonReviewPage() {
                         <button
                           onClick={() => setViewMode('individual')}
                           title="Individual Review"
-                          className={`px-2.5 py-1.5 rounded-md transition-colors ${
-                            viewMode === 'individual' 
-                              ? 'bg-white text-gray-900 shadow-sm' 
-                              : 'text-gray-600 hover:text-gray-900'
-                          }`}
+                          className="px-2.5 py-1.5 rounded-md transition-colors bg-white text-gray-900 shadow-sm"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -345,11 +333,7 @@ export default function SalonReviewPage() {
                         <button
                           onClick={() => setViewMode('list')}
                           title="List View"
-                          className={`px-2.5 py-1.5 rounded-md transition-colors ${
-                            viewMode === 'list' 
-                              ? 'bg-white text-gray-900 shadow-sm' 
-                              : 'text-gray-600 hover:text-gray-900'
-                          }`}
+                          className="px-2.5 py-1.5 rounded-md transition-colors text-gray-600 hover:text-gray-900"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
@@ -670,11 +654,7 @@ export default function SalonReviewPage() {
                       <button
                         onClick={() => setViewMode('individual')}
                         title="Individual Review"
-                        className={`px-2.5 py-1.5 rounded-md transition-colors ${
-                          viewMode === 'individual' 
-                            ? 'bg-white text-gray-900 shadow-sm' 
-                            : 'text-gray-600 hover:text-gray-900'
-                        }`}
+                        className="px-2.5 py-1.5 rounded-md transition-colors text-gray-600 hover:text-gray-900"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -683,11 +663,7 @@ export default function SalonReviewPage() {
                       <button
                         onClick={() => setViewMode('list')}
                         title="List View"
-                        className={`px-2.5 py-1.5 rounded-md transition-colors ${
-                          viewMode === 'list' 
-                            ? 'bg-white text-gray-900 shadow-sm' 
-                            : 'text-gray-600 hover:text-gray-900'
-                        }`}
+                        className="px-2.5 py-1.5 rounded-md transition-colors bg-white text-gray-900 shadow-sm"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />

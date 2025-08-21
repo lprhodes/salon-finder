@@ -34,7 +34,7 @@ export default function LoginPage() {
       } else {
         setError(data.error || 'Invalid password');
       }
-    } catch (err) {
+    } catch (_err) {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
