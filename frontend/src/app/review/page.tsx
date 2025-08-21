@@ -93,6 +93,7 @@ export default function SalonReviewPage() {
       const response = await fetch('/api/blob/upload', {
         method: 'POST',
         body: formData,
+        credentials: 'include',
       });
 
       const data = await response.json();
