@@ -194,13 +194,13 @@ export default function SalonReviewPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Compact Header */}
-        <div className="bg-white rounded-lg shadow-sm px-5 py-3 mb-4">
-          <div className="flex justify-between items-start">
+        {/* Compact Header - Responsive */}
+        <div className="bg-white rounded-lg shadow-sm px-3 sm:px-5 py-3 mb-4">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
             <div>
-              <h1 className="text-xl font-bold">Salon Data Review & Editor</h1>
+              <h1 className="text-lg sm:text-xl font-bold">Salon Data Review & Editor</h1>
               {salons.length > 0 && (
-                <div className="flex gap-3 text-sm mt-1">
+                <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm mt-1">
                   <span>Total: <strong>{stats.total}</strong></span>
                   <span className="text-green-600">Approved: <strong>{stats.approved}</strong></span>
                   <span className="text-red-600">Rejected: <strong>{stats.rejected}</strong></span>
@@ -219,17 +219,18 @@ export default function SalonReviewPage() {
               />
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
+                className="px-2 sm:px-3 py-1 sm:py-1.5 bg-blue-600 text-white text-xs sm:text-sm rounded-md hover:bg-blue-700"
               >
-                Upload salon-results.json
+                <span className="hidden sm:inline">Upload salon-results.json</span>
+                <span className="sm:hidden">Upload JSON</span>
               </button>
               
               {salons.length > 0 && (
                 <button
                   onClick={exportData}
-                  className="px-3 py-1.5 bg-green-600 text-white text-sm rounded-md hover:bg-green-700"
+                  className="px-2 sm:px-3 py-1 sm:py-1.5 bg-green-600 text-white text-xs sm:text-sm rounded-md hover:bg-green-700"
                 >
-                  Export JSON
+                  Export
                 </button>
               )}
             </div>
@@ -240,9 +241,87 @@ export default function SalonReviewPage() {
           <>
             {viewMode === 'individual' && currentSalon && (
               <>
-                {/* Navigation Bar with Controls */}
-                <div className="bg-white rounded-lg shadow-sm px-4 py-2.5 mb-4">
-                  <div className="flex items-center justify-between">
+                {/* Navigation Bar with Controls - Responsive */}
+                <div className="bg-white rounded-lg shadow-sm px-3 sm:px-4 py-2.5 mb-4">
+                  {/* Mobile Layout */}
+                  <div className="sm:hidden">
+                    {/* Top Row - View Toggle and Navigation */}
+                    <div className="flex items-center justify-between mb-2">
+                      {/* View Toggle */}
+                      <div className="flex bg-gray-100 rounded-lg p-0.5">
+                        <button
+                          onClick={() => setViewMode('individual')}
+                          title="Individual Review"
+                          className={`px-2 py-1 rounded-md transition-colors ${
+                            viewMode === 'individual' 
+                              ? 'bg-white text-gray-900 shadow-sm' 
+                              : 'text-gray-600 hover:text-gray-900'
+                          }`}
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                        </button>
+                        <button
+                          onClick={() => setViewMode('list')}
+                          title="List View"
+                          className={`px-2 py-1 rounded-md transition-colors ${
+                            viewMode === 'list' 
+                              ? 'bg-white text-gray-900 shadow-sm' 
+                              : 'text-gray-600 hover:text-gray-900'
+                          }`}
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                          </svg>
+                        </button>
+                      </div>
+                      
+                      {/* Navigation Buttons */}
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
+                          disabled={currentIndex === 0}
+                          className="px-2.5 py-1 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 disabled:opacity-50"
+                        >
+                          ←
+                        </button>
+                        <button
+                          onClick={() => setCurrentIndex(Math.min(salons.length - 1, currentIndex + 1))}
+                          disabled={currentIndex === salons.length - 1}
+                          className="px-2.5 py-1 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 disabled:opacity-50"
+                        >
+                          →
+                        </button>
+                      </div>
+                    </div>
+                    
+                    {/* Bottom Row - Progress */}
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between text-xs">
+                        <span>
+                          Salon <strong>{currentIndex + 1}</strong>/<strong>{salons.length}</strong>
+                        </span>
+                        <span className={`px-1.5 py-0.5 rounded text-xs font-semibold ${
+                          salonStatuses[currentIndex] === 'approved' ? 'bg-green-100 text-green-800' :
+                          salonStatuses[currentIndex] === 'rejected' ? 'bg-red-100 text-red-800' :
+                          'bg-yellow-100 text-yellow-800'
+                        }`}>
+                          {(salonStatuses[currentIndex] || 'pending').toUpperCase()}
+                        </span>
+                        <span className="text-gray-500">{Math.round(((currentIndex + 1) / salons.length) * 100)}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-1.5">
+                        <div 
+                          className="bg-blue-600 h-1.5 rounded-full transition-all"
+                          style={{ width: `${((currentIndex + 1) / salons.length) * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Desktop Layout */}
+                  <div className="hidden sm:flex items-center justify-between">
                     {/* Left Side - View Toggle and Previous Button */}
                     <div className="flex items-center">
                       {/* View Toggle */}
