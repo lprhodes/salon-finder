@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import path from "path";
 
 export const config = {
@@ -24,7 +24,7 @@ export const config = {
   THUMBNAIL_HEIGHT: parseInt(process.env.THUMBNAIL_HEIGHT || "300", 10),
 
   /** Directory path for storing downloaded thumbnails */
-  THUMBNAILS_DIR: path.join(process.cwd(), "thumbnails"),
+  THUMBNAILS_DIR: path.join(process.cwd(), "public", "thumbnails"),
 
   /** Maximum number of thumbnails to download per salon */
   MAX_THUMBNAILS_PER_SALON: 3,

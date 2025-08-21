@@ -163,7 +163,7 @@ export async function POST(request: Request) {
       validSalons.map(async (salon: SalonInput) => {
         const existingCount = await collection.countDocuments({
           name: salon.name,
-          'address.suburb': salon.suburb || extractSuburbFromAddress(salon.address)
+          'address.suburb': salon.suburb || (salon.address ? extractSuburbFromAddress(salon.address) : '') || ''
         });
         return {
           salon,

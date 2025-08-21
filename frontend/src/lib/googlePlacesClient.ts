@@ -154,7 +154,7 @@ export async function enrichWithGooglePlaces(salon: Salon, suburb: string): Prom
   
   // First try with the full name and suburb
   console.log(`🔍 Searching Google Places for: ${salon.name} in ${suburb}`);
-  let searchQuery = `${salon.name} salon ${suburb}`;
+  const searchQuery = `${salon.name} salon ${suburb}`;
   let placeData = await searchPlace(searchQuery);
   
   // If the first search fails, try with the name and address
@@ -217,7 +217,7 @@ export async function enrichWithGooglePlaces(salon: Salon, suburb: string): Prom
     
     // ALWAYS prioritize Google Places photos over other sources
     thumbnails: placeData.photos && placeData.photos.length > 0 && config.GOOGLE_PLACES_API_KEY
-      ? placeData.photos.slice(0, 3).map((photo, index) => {
+      ? placeData.photos.slice(0, 3).map((photo: any, index: number) => {
           // Validate photo reference exists
           if (!photo.photo_reference) {
             console.warn(`  ⚠️ Photo ${index + 1} missing photo_reference`);
@@ -245,7 +245,7 @@ export async function enrichWithGooglePlaces(salon: Salon, suburb: string): Prom
           console.log(`     Full URL: ${url.substring(0, 150)}...`);
           
           return url;
-        }).filter(url => url !== null) // Remove any null entries
+        }).filter((url: string | null) => url !== null) // Remove any null entries
       : salon.thumbnails || [],
 
     contactNumber: placeData.formatted_phone_number 
@@ -262,7 +262,7 @@ export async function enrichWithGooglePlaces(salon: Salon, suburb: string): Prom
         const formattedHours = formatBusinessHours(placeData.opening_hours);
         
         // Return the structured format { day: { open: "HH:MM", close: "HH:MM" } }
-        return formattedHours;
+        return formattedHours as typeof salon.businessHours;
       })()
     ) : salon.businessHours
   };

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -96,7 +95,7 @@ export default function SalonResults({ salons, selectedSalons, showApprove,
                   <div className="flex-1 min-w-0">
                     <CardTitle className="text-lg mb-2">{salon.name}</CardTitle>
                     {/* Display salon thumbnails if available */}
-                    {(salon.thumbnails?.length > 0 || salon.localThumbnails?.length > 0) && (
+                    {((salon.thumbnails?.length ?? 0) > 0 || (salon.localThumbnails?.length ?? 0) > 0) && (
                       <SalonThumbnails 
                         thumbnails={salon.thumbnails}
                         localThumbnails={salon.localThumbnails}

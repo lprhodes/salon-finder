@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trash2, Clock, Database, Server } from 'lucide-react';
+import { Trash2, Clock, Server } from 'lucide-react';
 
 interface CacheMetadata {
   suburb: string;

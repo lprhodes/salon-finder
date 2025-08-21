@@ -499,7 +499,7 @@ export class PerplexityClient {
               validItems.forEach(item => addSalon(item));
             }
           }
-        } catch (e) {
+        } catch {
           // Continue to next match
         }
       }

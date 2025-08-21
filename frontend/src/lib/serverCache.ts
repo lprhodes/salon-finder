@@ -38,8 +38,8 @@ export class ServerCache {
       await fs.mkdir(CACHE_DIR, { recursive: true });
       await fs.mkdir(SALON_LIST_CACHE_DIR, { recursive: true });
       await fs.mkdir(SALON_DETAILS_CACHE_DIR, { recursive: true });
-    } catch (error) {
-      console.error('Failed to initialize cache directories:', error);
+    } catch {
+      console.error('Failed to initialize cache directories');
     }
   }
 
@@ -72,8 +72,8 @@ export class ServerCache {
       await fs.writeFile(filepath, JSON.stringify(cacheData, null, 2));
       await this.updateIndex(suburb, salons.length, model);
       console.log(`📁 Cached ${salons.length} salons for ${suburb}`);
-    } catch (error) {
-      console.error('Failed to save salon list cache:', error);
+    } catch {
+      console.error('Failed to save salon list cache');
     }
   }
 
@@ -95,7 +95,7 @@ export class ServerCache {
       }
       
       return cached;
-    } catch (error) {
+    } catch {
       // File doesn't exist or can't be read
       return null;
     }
@@ -129,8 +129,8 @@ export class ServerCache {
       } else {
         console.log(`📁 Created cache for ${salon.name} (${model})`);
       }
-    } catch (error) {
-      console.error('Failed to save salon details cache:', error);
+    } catch {
+      console.error('Failed to save salon details cache');
     }
   }
 
@@ -154,7 +154,7 @@ export class ServerCache {
       
       console.log(`📁 Using cached details for ${salonName} (${model})`);
       return cached.salon;
-    } catch (error) {
+    } catch {
       // File doesn't exist or can't be read
       return null;
     }
@@ -170,7 +170,7 @@ export class ServerCache {
     try {
       await fs.unlink(filepath);
       await this.removeFromIndex(suburb);
-    } catch (error) {
+    } catch {
       // File might not exist
     }
   }
@@ -192,7 +192,7 @@ export class ServerCache {
       }
       
       return validEntries;
-    } catch (error) {
+    } catch {
       return [];
     }
   }
@@ -218,8 +218,8 @@ export class ServerCache {
       await fs.unlink(CACHE_INDEX_FILE).catch(() => {});
       
       console.log('🗑️ Cleared all caches');
-    } catch (error) {
-      console.error('Failed to clear caches:', error);
+    } catch {
+      console.error('Failed to clear caches');
     }
   }
 
@@ -253,7 +253,7 @@ export class ServerCache {
         salonDetails: detailFiles.length,
         totalSize: Math.round(totalSize / 1024) // KB
       };
-    } catch (error) {
+    } catch {
       return { salonLists: 0, salonDetails: 0, totalSize: 0 };
     }
   }
@@ -317,8 +317,8 @@ export class ServerCache {
       index.sort((a, b) => b.timestamp - a.timestamp);
       
       await fs.writeFile(CACHE_INDEX_FILE, JSON.stringify(index, null, 2));
-    } catch (error) {
-      console.error('Failed to update cache index:', error);
+    } catch {
+      console.error('Failed to update cache index');
     }
   }
 
@@ -328,7 +328,7 @@ export class ServerCache {
       const index: CacheMetadata[] = JSON.parse(data);
       const filtered = index.filter(entry => entry.suburb !== suburb);
       await fs.writeFile(CACHE_INDEX_FILE, JSON.stringify(filtered, null, 2));
-    } catch (error) {
+    } catch {
       // Index might not exist
     }
   }

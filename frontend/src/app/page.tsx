@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import SuburbSelect from '@/components/SuburbSelect';
 import ModelSelector from '@/components/ModelSelector';
 import SalonResults from '@/components/SalonResults';

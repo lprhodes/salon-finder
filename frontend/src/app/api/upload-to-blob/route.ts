@@ -22,14 +22,14 @@ export async function POST(request: Request) {
       );
     }
     
-    let results: any[] = [];
+    const results: any[] = [];
     
     if (salonName && placeId) {
       // Upload thumbnails for a specific salon
       console.log(`Uploading thumbnails for ${salonName} to Vercel Blob`);
       
       // Get cached salon details
-      const cachedDetails = await ServerCache.getSalonDetails('sonar', placeId);
+      const cachedDetails = await ServerCache.getSalonDetails(placeId, salonName, 'sonar');
       
       if (!cachedDetails || !cachedDetails.localThumbnails || cachedDetails.localThumbnails.length === 0) {
         return NextResponse.json(
@@ -43,9 +43,12 @@ export async function POST(request: Request) {
       
       if (blobUrls.length > 0) {
         // Update cache with Blob URLs
-        cachedDetails.blobUrls = blobUrls;
-        cachedDetails.thumbnails = blobUrls; // Replace thumbnails with Blob URLs
-        await ServerCache.saveSalonDetails(cachedDetails, 'sonar', placeId);
+        const updatedDetails = {
+          ...cachedDetails,
+          blobUrls,
+          thumbnails: blobUrls // Replace thumbnails with Blob URLs
+        };
+        await ServerCache.saveSalonDetails(updatedDetails as any, 'sonar', placeId);
         
         results.push({
           salonName,

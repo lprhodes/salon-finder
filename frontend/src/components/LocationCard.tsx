@@ -46,8 +46,8 @@ export default function LocationCard({ salon }: LocationCardProps) {
         {hasCoordinates && (
           <div className="w-full rounded-lg overflow-hidden">
             <GoogleMapEmbed
-              latitude={salon.coordinates.latitude}
-              longitude={salon.coordinates.longitude}
+              latitude={salon.coordinates!.latitude}
+              longitude={salon.coordinates!.longitude}
               name={salon.name}
               address={salon.address}
               width={600}
@@ -64,7 +64,7 @@ export default function LocationCard({ salon }: LocationCardProps) {
           {hasCoordinates && (
             <div className="text-sm text-muted-foreground">
               <span className="font-medium">Coordinates:</span>{' '}
-              {salon.coordinates.latitude.toFixed(6)}, {salon.coordinates.longitude.toFixed(6)}
+              {salon.coordinates!.latitude.toFixed(6)}, {salon.coordinates!.longitude.toFixed(6)}
             </div>
           )}
           
@@ -72,7 +72,7 @@ export default function LocationCard({ salon }: LocationCardProps) {
           {hasCoordinates && (
             <div className="flex gap-2">
               <a
-                href={`https://www.google.com/maps/dir/?api=1&destination=${salon.coordinates.latitude},${salon.coordinates.longitude}`}
+                href={`https://www.google.com/maps/dir/?api=1&destination=${salon.coordinates!.latitude},${salon.coordinates!.longitude}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"

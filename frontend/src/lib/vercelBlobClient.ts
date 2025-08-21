@@ -9,8 +9,7 @@ import path from 'path';
  * @returns The public URL of the uploaded blob
  */
 export async function uploadThumbnailToBlob(
-  localPath: string,
-  salonName: string
+  localPath: string
 ): Promise<string> {
   try {
     // Construct the full path to the local file
@@ -58,7 +57,7 @@ export async function uploadThumbnailsToBlob(
   try {
     // Upload all thumbnails in parallel
     const uploadPromises = localPaths.map(localPath => 
-      uploadThumbnailToBlob(localPath, salonName)
+      uploadThumbnailToBlob(localPath)
     );
     
     const blobUrls = await Promise.all(uploadPromises);

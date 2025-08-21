@@ -73,7 +73,7 @@ export default function AdminPage() {
       const response = await fetch('/api/test-db');
       const data = await response.json();
       alert(`Database Connection: ${data.success ? 'Success' : 'Failed'}\n\nTotal Salons: ${data.salonCount}\nDatabase: ${data.databaseName}`);
-    } catch (err) {
+    } catch {
       alert('Failed to test database connection');
     }
   };

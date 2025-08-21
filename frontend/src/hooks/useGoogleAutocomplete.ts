@@ -5,13 +5,14 @@ import { useEffect, useRef, MutableRefObject } from 'react';
 interface UseGoogleAutocompleteProps {
   inputRef: MutableRefObject<HTMLInputElement | null>;
   onPlaceSelect: (place: google.maps.places.PlaceResult) => void;
+  enabled?: boolean;
 }
 
-export function useGoogleAutocomplete({ inputRef, onPlaceSelect }: UseGoogleAutocompleteProps) {
+export function useGoogleAutocomplete({ inputRef, onPlaceSelect, enabled = true }: UseGoogleAutocompleteProps) {
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
 
   useEffect(() => {
-    if (!inputRef.current || !window.google || !window.google.maps || !window.google.maps.places) {
+    if (!enabled || !inputRef.current || !window.google || !window.google.maps || !window.google.maps.places) {
       return;
     }
 
@@ -36,7 +37,7 @@ export function useGoogleAutocomplete({ inputRef, onPlaceSelect }: UseGoogleAuto
         google.maps.event.clearInstanceListeners(autocompleteRef.current);
       }
     };
-  }, [inputRef, onPlaceSelect]);
+  }, [inputRef, onPlaceSelect, enabled]);
 
   return autocompleteRef;
 }

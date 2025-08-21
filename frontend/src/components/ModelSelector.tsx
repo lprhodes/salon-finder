@@ -6,7 +6,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { config } from "@/config/config"
+// import { config } from "@/config/config"
 import type { PerplexityModel } from '@/lib/perplexityClient';
 
 type Props = {

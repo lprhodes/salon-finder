@@ -20,7 +20,7 @@ const VALID_SERVICE_CATEGORIES = [
   'Makeup'
 ];
 
-const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+// const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 export default function SalonReviewPage() {
   const [salons, setSalons] = useState<any[]>([]);
@@ -330,7 +330,7 @@ export default function SalonReviewPage() {
                         No images available
                       </div>
                     ) : (
-                      vercelThumbnails.map((url, idx) => (
+                      vercelThumbnails.map((url: string, idx: number) => (
                         <div key={idx} className="relative flex-shrink-0">
                           <img
                             src={url}

@@ -143,7 +143,6 @@ export class SalonCache {
    */
   static clearOldCaches(): void {
     const allCached = this.getAllCached();
-    const now = Date.now();
     
     allCached.forEach(entry => {
       if (this.isExpired(entry.timestamp)) {

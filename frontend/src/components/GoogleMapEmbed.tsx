@@ -19,7 +19,6 @@ export default function GoogleMapEmbed({
   latitude,
   longitude,
   name,
-  address,
   width = 600,
   height = 400,
   zoom = 16,

@@ -20,13 +20,12 @@ export default function SuburbAutocomplete({ value, onChange, onSelect }: Props)
     }
   }, []);
 
-  // Only use the autocomplete hook if Google Maps is available
-  if (isGoogleMapsAvailable && onSelect) {
-    useGoogleAutocomplete({
-      inputRef,
-      onPlaceSelect: onSelect,
-    });
-  }
+  // Use the autocomplete hook (must be called unconditionally for React hooks rules)
+  useGoogleAutocomplete({
+    inputRef,
+    onPlaceSelect: onSelect || (() => {}),
+    enabled: isGoogleMapsAvailable && !!onSelect,
+  });
 
   return (
     <input
