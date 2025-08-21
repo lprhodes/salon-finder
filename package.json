@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.0",
-    "axios": "^1.8.1",
+    "axios": "^1.11.0",
     "clipboardy": "^4.0.0",
     "dotenv": "^16.4.7",
     "image-type": "^5.2.0",
