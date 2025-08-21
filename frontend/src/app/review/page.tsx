@@ -196,46 +196,43 @@ export default function SalonReviewPage() {
       <div className="max-w-7xl mx-auto px-4">
         {/* Compact Header */}
         <div className="bg-white rounded-lg shadow-sm px-5 py-3 mb-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-6">
+          <div className="flex justify-between items-start">
+            <div>
               <h1 className="text-xl font-bold">Salon Data Review & Editor</h1>
-              
-              <div className="flex items-center gap-3">
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept=".json"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
-                >
-                  Upload salon-results.json
-                </button>
-
-                {salons.length > 0 && (
-                  <>
-                    <div className="flex gap-3 text-sm">
-                      <span>Total: <strong>{stats.total}</strong></span>
-                      <span className="text-green-600">Approved: <strong>{stats.approved}</strong></span>
-                      <span className="text-red-600">Rejected: <strong>{stats.rejected}</strong></span>
-                      <span className="text-yellow-600">Pending: <strong>{stats.pending}</strong></span>
-                    </div>
-                  </>
-                )}
-              </div>
+              {salons.length > 0 && (
+                <div className="flex gap-3 text-sm mt-1">
+                  <span>Total: <strong>{stats.total}</strong></span>
+                  <span className="text-green-600">Approved: <strong>{stats.approved}</strong></span>
+                  <span className="text-red-600">Rejected: <strong>{stats.rejected}</strong></span>
+                  <span className="text-yellow-600">Pending: <strong>{stats.pending}</strong></span>
+                </div>
+              )}
             </div>
 
-            {salons.length > 0 && (
+            <div className="flex items-center gap-2">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".json"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
               <button
-                onClick={exportData}
-                className="px-3 py-1.5 bg-green-600 text-white text-sm rounded-md hover:bg-green-700"
+                onClick={() => fileInputRef.current?.click()}
+                className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
               >
-                Export JSON
+                Upload salon-results.json
               </button>
-            )}
+              
+              {salons.length > 0 && (
+                <button
+                  onClick={exportData}
+                  className="px-3 py-1.5 bg-green-600 text-white text-sm rounded-md hover:bg-green-700"
+                >
+                  Export JSON
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
