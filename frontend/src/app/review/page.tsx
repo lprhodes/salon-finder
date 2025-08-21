@@ -195,63 +195,69 @@ export default function SalonReviewPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Header */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-bold">Salon Data Review & Editor</h1>
-            <Link href="/" className="text-blue-600 hover:text-blue-700">
-              ← Back to Salon Finder
-            </Link>
-          </div>
+        {/* Compact Header */}
+        <div className="bg-white rounded-lg shadow-sm px-5 py-3 mb-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              <h1 className="text-xl font-bold">Salon Data Review & Editor</h1>
+              
+              <div className="flex items-center gap-3">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".json"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
+                >
+                  Upload salon-results.json
+                </button>
 
-          <div className="flex items-center gap-4">
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".json"
-              onChange={handleFileUpload}
-              className="hidden"
-            />
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            >
-              Upload salon-results.json
-            </button>
+                {salons.length > 0 && (
+                  <>
+                    <div className="flex gap-3 text-sm">
+                      <span>Total: <strong>{stats.total}</strong></span>
+                      <span className="text-green-600">Approved: <strong>{stats.approved}</strong></span>
+                      <span className="text-red-600">Rejected: <strong>{stats.rejected}</strong></span>
+                      <span className="text-yellow-600">Pending: <strong>{stats.pending}</strong></span>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
 
-            {salons.length > 0 && (
-              <>
-                <div className="flex gap-4 text-sm">
-                  <span>Total: <strong>{stats.total}</strong></span>
-                  <span className="text-green-600">Approved: <strong>{stats.approved}</strong></span>
-                  <span className="text-red-600">Rejected: <strong>{stats.rejected}</strong></span>
-                  <span className="text-yellow-600">Pending: <strong>{stats.pending}</strong></span>
-                </div>
-
+            <div className="flex items-center gap-3">
+              {salons.length > 0 && (
                 <button
                   onClick={exportData}
-                  className="ml-auto px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                  className="px-3 py-1.5 bg-green-600 text-white text-sm rounded-md hover:bg-green-700"
                 >
                   Export JSON
                 </button>
-              </>
-            )}
+              )}
+              <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm">
+                ← Back to Salon Finder
+              </Link>
+            </div>
           </div>
         </div>
 
         {salons.length > 0 && (
           <>
             {/* View Toggle */}
-            <div className="flex gap-2 mb-6">
+            <div className="flex gap-2 mb-4">
               <button
                 onClick={() => setViewMode('individual')}
-                className={`px-4 py-2 rounded-lg ${viewMode === 'individual' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}
+                className={`px-3 py-1.5 text-sm rounded-md ${viewMode === 'individual' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}
               >
                 Individual Review
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`px-4 py-2 rounded-lg ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}
+                className={`px-3 py-1.5 text-sm rounded-md ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'}`}
               >
                 List View
               </button>
@@ -259,12 +265,12 @@ export default function SalonReviewPage() {
 
             {viewMode === 'individual' && currentSalon && (
               <>
-                {/* Progress Bar */}
-                <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
-                  <div className="flex justify-between mb-2">
-                    <span>
+                {/* Compact Progress Bar */}
+                <div className="bg-white rounded-lg shadow-sm px-4 py-2.5 mb-4">
+                  <div className="flex justify-between items-center mb-1.5">
+                    <span className="text-sm">
                       Reviewing salon <strong>{currentIndex + 1}</strong> of <strong>{salons.length}</strong>
-                      <span className={`ml-2 px-2 py-1 rounded text-xs font-semibold ${
+                      <span className={`ml-2 px-1.5 py-0.5 rounded text-xs font-semibold ${
                         salonStatuses[currentIndex] === 'approved' ? 'bg-green-100 text-green-800' :
                         salonStatuses[currentIndex] === 'rejected' ? 'bg-red-100 text-red-800' :
                         'bg-yellow-100 text-yellow-800'
@@ -272,38 +278,38 @@ export default function SalonReviewPage() {
                         {(salonStatuses[currentIndex] || 'pending').toUpperCase()}
                       </span>
                     </span>
-                    <span>{Math.round(((currentIndex + 1) / salons.length) * 100)}%</span>
+                    <span className="text-sm">{Math.round(((currentIndex + 1) / salons.length) * 100)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 rounded-full h-1.5">
                     <div 
-                      className="bg-blue-600 h-2 rounded-full transition-all"
+                      className="bg-blue-600 h-1.5 rounded-full transition-all"
                       style={{ width: `${((currentIndex + 1) / salons.length) * 100}%` }}
                     />
                   </div>
                 </div>
 
                 {/* Navigation */}
-                <div className="flex justify-between mb-6">
+                <div className="flex justify-between mb-4">
                   <button
                     onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
                     disabled={currentIndex === 0}
-                    className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50"
+                    className="px-3 py-1.5 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 disabled:opacity-50"
                   >
                     ← Previous
                   </button>
                   <button
                     onClick={() => setCurrentIndex(Math.min(salons.length - 1, currentIndex + 1))}
                     disabled={currentIndex === salons.length - 1}
-                    className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50"
+                    className="px-3 py-1.5 bg-gray-600 text-white text-sm rounded-md hover:bg-gray-700 disabled:opacity-50"
                   >
                     Next →
                   </button>
                 </div>
 
                 {/* Image Gallery */}
-                <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-semibold">
+                <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+                  <div className="flex justify-between items-center mb-3">
+                    <h3 className="text-base font-semibold">
                       Salon Images ({vercelThumbnails.length})
                     </h3>
                     <div className="flex gap-2">
@@ -317,7 +323,7 @@ export default function SalonReviewPage() {
                       <button
                         onClick={() => imageFileInputRef.current?.click()}
                         disabled={uploadingImage}
-                        className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                        className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 disabled:opacity-50"
                       >
                         {uploadingImage ? 'Uploading...' : 'Add Image'}
                       </button>
@@ -326,7 +332,7 @@ export default function SalonReviewPage() {
 
                   <div className="flex gap-3 overflow-x-auto pb-2">
                     {vercelThumbnails.length === 0 ? (
-                      <div className="w-full text-center py-12 text-gray-500 border-2 border-dashed border-gray-300 rounded-lg">
+                      <div className="w-full text-center py-8 text-gray-500 border-2 border-dashed border-gray-300 rounded-lg">
                         No images available
                       </div>
                     ) : (
@@ -355,50 +361,50 @@ export default function SalonReviewPage() {
                 </div>
 
                 {/* Editor Form */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20">
-                  <div className="lg:col-span-2 bg-white rounded-lg shadow-sm p-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-16">
+                  <div className="lg:col-span-2 bg-white rounded-lg shadow-sm p-4">
                     {/* Basic Information */}
-                    <div className="mb-6">
-                      <h3 className="text-lg font-semibold mb-4">Basic Information</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="mb-4">
+                      <h3 className="text-base font-semibold mb-3">Basic Information</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="md:col-span-2">
-                          <label className="block text-sm font-medium mb-1">Salon Name *</label>
+                          <label className="block text-xs font-medium mb-0.5">Salon Name *</label>
                           <input
                             type="text"
                             value={currentSalon.name || ''}
                             onChange={(e) => updateSalonField('name', e.target.value)}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md"
                             required
                           />
                         </div>
                         <div className="md:col-span-2">
-                          <label className="block text-sm font-medium mb-1">Address *</label>
+                          <label className="block text-xs font-medium mb-0.5">Address *</label>
                           <input
                             type="text"
                             value={currentSalon.address || ''}
                             onChange={(e) => updateSalonField('address', e.target.value)}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md"
                             required
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium mb-1">Latitude *</label>
+                          <label className="block text-xs font-medium mb-0.5">Latitude *</label>
                           <input
                             type="number"
                             value={currentSalon.coordinates?.latitude || ''}
                             onChange={(e) => updateSalonField('coordinates.latitude', e.target.value)}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md"
                             step="any"
                             required
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium mb-1">Longitude *</label>
+                          <label className="block text-xs font-medium mb-0.5">Longitude *</label>
                           <input
                             type="number"
                             value={currentSalon.coordinates?.longitude || ''}
                             onChange={(e) => updateSalonField('coordinates.longitude', e.target.value)}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md"
                             step="any"
                             required
                           />
@@ -432,56 +438,56 @@ export default function SalonReviewPage() {
                     </div>
 
                     {/* Contact Information */}
-                    <div className="mb-6">
-                      <h3 className="text-lg font-semibold mb-4">Contact Information</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="mb-4">
+                      <h3 className="text-base font-semibold mb-3">Contact Information</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-sm font-medium mb-1">Phone Number</label>
+                          <label className="block text-xs font-medium mb-0.5">Phone Number</label>
                           <input
                             type="tel"
                             value={currentSalon.contactNumber || ''}
                             onChange={(e) => updateSalonField('contactNumber', e.target.value)}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium mb-1">Email</label>
+                          <label className="block text-xs font-medium mb-0.5">Email</label>
                           <input
                             type="email"
                             value={currentSalon.contactEmail || ''}
                             onChange={(e) => updateSalonField('contactEmail', e.target.value)}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md"
                           />
                         </div>
                         <div className="relative">
-                          <label className="block text-sm font-medium mb-1">Website</label>
+                          <label className="block text-xs font-medium mb-0.5">Website</label>
                           <input
                             type="url"
                             value={currentSalon.website || ''}
                             onChange={(e) => updateSalonField('website', e.target.value)}
-                            className="w-full px-3 py-2 border rounded-lg pr-16"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md pr-16"
                           />
                           {currentSalon.website && (
                             <button
                               onClick={() => window.open(currentSalon.website.startsWith('http') ? currentSalon.website : `https://${currentSalon.website}`, '_blank')}
-                              className="absolute right-2 bottom-2 px-2 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
+                              className="absolute right-1 bottom-1 px-1.5 py-0.5 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
                             >
                               Open
                             </button>
                           )}
                         </div>
                         <div className="relative">
-                          <label className="block text-sm font-medium mb-1">Booking Link</label>
+                          <label className="block text-xs font-medium mb-0.5">Booking Link</label>
                           <input
                             type="url"
                             value={currentSalon.bookingLink || ''}
                             onChange={(e) => updateSalonField('bookingLink', e.target.value)}
-                            className="w-full px-3 py-2 border rounded-lg pr-16"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md pr-16"
                           />
                           {currentSalon.bookingLink && (
                             <button
                               onClick={() => window.open(currentSalon.bookingLink.startsWith('http') ? currentSalon.bookingLink : `https://${currentSalon.bookingLink}`, '_blank')}
-                              className="absolute right-2 bottom-2 px-2 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
+                              className="absolute right-1 bottom-1 px-1.5 py-0.5 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
                             >
                               Open
                             </button>
@@ -495,24 +501,24 @@ export default function SalonReviewPage() {
                       <h3 className="text-lg font-semibold mb-4">Rating</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium mb-1">Rating Stars (0-5)</label>
+                          <label className="block text-xs font-medium mb-0.5">Rating Stars (0-5)</label>
                           <input
                             type="number"
                             value={currentSalon.rating?.stars || ''}
                             onChange={(e) => updateSalonField('rating.stars', parseFloat(e.target.value))}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md"
                             min="0"
                             max="5"
                             step="0.1"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium mb-1">Number of Reviewers</label>
+                          <label className="block text-xs font-medium mb-0.5">Number of Reviewers</label>
                           <input
                             type="number"
                             value={currentSalon.rating?.numberOfReviewers || ''}
                             onChange={(e) => updateSalonField('rating.numberOfReviewers', parseInt(e.target.value))}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="w-full px-2 py-1.5 text-sm border rounded-md"
                             min="0"
                           />
                         </div>
