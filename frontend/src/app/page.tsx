@@ -5,6 +5,7 @@ import SuburbSelect from '@/components/SuburbSelect';
 import ModelSelector from '@/components/ModelSelector';
 import SalonResults from '@/components/SalonResults';
 import CachedSuburbs from '@/components/CachedSuburbs';
+import LogoutButton from '@/components/LogoutButton';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { PerplexityModel } from '@/lib/perplexityClient';
@@ -552,12 +553,15 @@ export default function Home() {
     <main className="min-h-screen p-8 max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Salon Finder</h1>
-        <a 
-          href="/review" 
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          Review Editor →
-        </a>
+        <div className="flex items-center gap-4">
+          <a 
+            href="/review" 
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Review Editor →
+          </a>
+          <LogoutButton />
+        </div>
       </div>
       
       <div className="space-y-6">

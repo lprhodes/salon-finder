@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import LocationCard from '@/components/LocationCard';
+import LogoutButton from '@/components/LogoutButton';
 
 // Valid service categories from config
 const VALID_SERVICE_CATEGORIES = [
@@ -233,6 +234,8 @@ export default function SalonReviewPage() {
                   Export
                 </button>
               )}
+              
+              <LogoutButton />
             </div>
           </div>
         </div>
