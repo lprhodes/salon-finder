@@ -161,10 +161,18 @@ export default function SalonReviewPage() {
   };
 
   const exportData = () => {
-    const exportData = salons.map((salon, index) => ({
-      ...salon,
-      _meta: { ...salon._meta, reviewStatus: salonStatuses[index] || 'pending' }
-    })).filter((_, index) => salonStatuses[index] !== 'rejected');
+    const exportData = salons.map((salon, index) => {
+      // Filter thumbnails to only include Vercel Blob URLs
+      const filteredThumbnails = salon.thumbnails 
+        ? salon.thumbnails.filter((url: string) => isVercelBlobUrl(url))
+        : [];
+      
+      return {
+        ...salon,
+        thumbnails: filteredThumbnails,
+        _meta: { ...salon._meta, reviewStatus: salonStatuses[index] || 'pending' }
+      };
+    }).filter((_, index) => salonStatuses[index] !== 'rejected');
 
     const dataStr = JSON.stringify(exportData, null, 2);
     const dataBlob = new Blob([dataStr], { type: 'application/json' });
