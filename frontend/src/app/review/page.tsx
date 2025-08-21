@@ -288,7 +288,7 @@ export default function SalonReviewPage() {
                     </div>
                     
                     {/* Center Section - Progress */}
-                    <div className="flex flex-col items-center gap-1">
+                    <div className="flex flex-col items-center gap-1 flex-1 max-w-lg mx-4">
                       {/* Progress Info */}
                       <div className="flex items-center gap-3 text-sm">
                         <span>
@@ -305,7 +305,7 @@ export default function SalonReviewPage() {
                       </div>
                       
                       {/* Progress Bar */}
-                      <div className="w-64 bg-gray-200 rounded-full h-1.5">
+                      <div className="w-full bg-gray-200 rounded-full h-1.5">
                         <div 
                           className="bg-blue-600 h-1.5 rounded-full transition-all"
                           style={{ width: `${((currentIndex + 1) / salons.length) * 100}%` }}
