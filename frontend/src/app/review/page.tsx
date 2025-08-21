@@ -244,7 +244,7 @@ export default function SalonReviewPage() {
                 <div className="bg-white rounded-lg shadow-sm px-4 py-2.5 mb-4">
                   <div className="flex items-center justify-between">
                     {/* Left Side - View Toggle and Previous Button */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center">
                       {/* View Toggle */}
                       <div className="flex bg-gray-100 rounded-lg p-0.5">
                         <button
@@ -275,7 +275,7 @@ export default function SalonReviewPage() {
                         </button>
                       </div>
                       
-                      <div className="h-6 w-px bg-gray-300" />
+                      <div className="h-6 w-px bg-gray-300 mx-3" />
                       
                       {/* Previous Button */}
                       <button
